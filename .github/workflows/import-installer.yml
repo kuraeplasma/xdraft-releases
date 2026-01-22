@@ -1,0 +1,20 @@
+name: Import Installer
+on: workflow_dispatch
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      releases: write
+    steps:
+      - name: Download from Toukou
+        run: |
+          curl -L -O https://github.com/kuraeplasma/toukou/releases/download/v1.0.1/X.Draft.Setup.1.0.0.exe
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v1.0.1
+          name: X Draft v1.0.1
+          body: Windows版インストーラー
+          files: X.Draft.Setup.1.0.0.exe
+          fail_on_unmatched_files: true
